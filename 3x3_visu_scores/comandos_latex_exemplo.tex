@@ -1,0 +1,32 @@
+
+% ============================================================
+% COMANDOS LaTeX DE EXEMPLO
+%
+% Pacotes recomendados:
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{pdflscape}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Métricas dos melhores rankings do experimento 3x3.}
+\label{tab:metricas-ranks-3x3-main}
+\input{3x3_visu_scores/tabela_metricas_ranks.tex}
+\end{table}
+
+\begin{landscape}
+\small
+\input{3x3_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\end{landscape}
+
+% Exemplo de figura:
+% Troque FEATURE1, FEATURE2 e FEATURE3 pelo nome gerado no arquivo.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{3x3_visu_scores/rank_1_FEATURE1__FEATURE2__FEATURE3_matriz_melhor_corte.pdf}
+\caption{Matriz de confusão do melhor ponto de corte do Rank 1.}
+\label{fig:rank1-3x3-matriz}
+\end{figure}

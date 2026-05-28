@@ -1,0 +1,22 @@
+\begin{table}
+\caption{Resumo geral do processo de tratamento da base.}
+\label{tab:resumo-etl}
+\begin{tabular}{lll}
+\toprule
+Métrica & Valor & Descrição \\
+\midrule
+Linhas iniciais & 284807 & Quantidade de registros antes do tratamento. \\
+Colunas iniciais & 31 & Quantidade de variáveis no arquivo original. \\
+Linhas finais & 283726 & Quantidade de registros após limpeza. \\
+Colunas finais & 31 & Quantidade de variáveis após renomeação. \\
+Duplicatas identificadas & 1081 & Número de linhas duplicadas detectadas. \\
+Removidas por duplicidade & 1081 & 0.3796\% das linhas iniciais. \\
+Linhas com faltantes & 0 & Linhas com pelo menos um valor ausente. \\
+Removidas por faltantes & 0 & 0.0000\% das linhas iniciais. \\
+Total removido & 1081 & 0.3796\% das linhas iniciais. \\
+Base preservada & 99.6204\% & Percentual da base original mantida após limpeza. \\
+Valores faltantes restantes & 0 & Deve ser zero após o tratamento. \\
+Dimensão final & 283726 x 31 & Linhas x colunas. \\
+\bottomrule
+\end{tabular}
+\end{table}

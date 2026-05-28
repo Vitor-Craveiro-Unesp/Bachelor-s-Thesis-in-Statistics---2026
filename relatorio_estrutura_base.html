@@ -1,0 +1,640 @@
+
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Relatório de Estrutura da Base</title>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background: #f4f6f8;
+                color: #020617;
+                margin: 0;
+                padding: 32px;
+            }
+
+            .container {
+                max-width: 1350px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 10px;
+                color: #020617;
+                font-size: 34px;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #475569;
+                font-size: 16px;
+                margin-bottom: 34px;
+            }
+
+            .section {
+                background: white;
+                border-radius: 16px;
+                padding: 24px;
+                margin-bottom: 28px;
+                box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            }
+
+            .section h2 {
+                text-align: center;
+                margin-top: 0;
+                margin-bottom: 22px;
+                font-size: 24px;
+                color: #020617;
+            }
+
+            .section h3 {
+                margin-top: 26px;
+                margin-bottom: 14px;
+                color: #0f172a;
+                font-size: 18px;
+            }
+
+            .section-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 14px;
+                flex-wrap: wrap;
+                margin-bottom: 18px;
+            }
+
+            .section-header h2 {
+                margin: 0;
+            }
+
+            .download-btn {
+                border: 1px solid #bfdbfe;
+                background: #eff6ff;
+                color: #1e3a8a;
+                padding: 8px 12px;
+                border-radius: 10px;
+                font-weight: 800;
+                font-size: 13px;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .download-btn:hover {
+                background: #dbeafe;
+            }
+
+            .metric-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 14px;
+                margin-top: 18px;
+            }
+
+            .metric-card {
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 14px;
+                padding: 16px;
+            }
+
+            .card-title {
+                font-size: 13px;
+                font-weight: 800;
+                color: #475569;
+                margin-bottom: 8px;
+            }
+
+            .card-value {
+                font-size: 23px;
+                font-weight: 900;
+                color: #020617;
+                font-family: Consolas, Monaco, monospace;
+            }
+
+            .card-desc {
+                font-size: 12px;
+                color: #64748b;
+                margin-top: 8px;
+                line-height: 1.35;
+            }
+
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 13px;
+                margin-top: 0;
+            }
+
+            .data-table th {
+                background: #0f172a;
+                color: white;
+                padding: 10px 8px;
+                text-align: left;
+                position: sticky;
+                top: 0;
+                z-index: 1;
+            }
+
+            .data-table td {
+                border-bottom: 1px solid #e2e8f0;
+                padding: 8px;
+                color: #020617;
+                white-space: nowrap;
+            }
+
+            .data-table tr:nth-child(even) {
+                background: #f8fafc;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                max-height: 580px;
+                overflow-y: auto;
+            }
+
+            .tag-area {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 10px;
+            }
+
+            .tag {
+                display: inline-block;
+                background: #eff6ff;
+                color: #1e3a8a;
+                border: 1px solid #bfdbfe;
+                border-radius: 999px;
+                padding: 6px 10px;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            .pipeline {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+                margin-top: 18px;
+            }
+
+            .step {
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 14px;
+                padding: 16px;
+                text-align: center;
+            }
+
+            .step-number {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                border-radius: 999px;
+                background: #2563eb;
+                color: white;
+                font-weight: 900;
+                margin-bottom: 8px;
+            }
+
+            .step-title {
+                font-size: 14px;
+                font-weight: 900;
+                color: #020617;
+                margin-bottom: 6px;
+            }
+
+            .step-desc {
+                font-size: 12px;
+                color: #475569;
+                line-height: 1.35;
+            }
+
+            .note {
+                background: #fffbeb;
+                border: 1px solid #fde68a;
+                color: #78350f;
+                border-radius: 12px;
+                padding: 14px 16px;
+                margin-top: 16px;
+                font-size: 14px;
+                line-height: 1.45;
+            }
+
+            @media (max-width: 1000px) {
+                .metric-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .pipeline {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 640px) {
+                .metric-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .pipeline {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <h1>Relatório de Estrutura da Base</h1>
+            <div class="subtitle">
+                ETL inicial, limpeza da base, renomeação das variáveis e análise estrutural dos campos.
+            </div>
+
+            <section class="section">
+                <h2>Fluxo do Tratamento</h2>
+
+                <div class="pipeline">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Leitura</div>
+                        <div class="step-desc">Arquivo original lido: <strong>a.csv</strong></div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Renomeação</div>
+                        <div class="step-desc">Time, Amount e Class foram renomeadas para nomes descritivos.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Limpeza</div>
+                        <div class="step-desc">Remoção de duplicatas e linhas com valores faltantes.</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Exportação</div>
+                        <div class="step-desc">Base tratada salva como <strong>creditcard.csv</strong>.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Resumo Geral do ETL</h2>
+
+                <div class="metric-grid">
+                    
+    <div class="metric-card">
+        <div class="card-title">Linhas iniciais</div>
+        <div class="card-value">284.807</div>
+        <div class="card-desc">Quantidade de registros antes do tratamento.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Colunas iniciais</div>
+        <div class="card-value">31</div>
+        <div class="card-desc">Quantidade de variáveis no arquivo original.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Linhas finais</div>
+        <div class="card-value">283.726</div>
+        <div class="card-desc">Quantidade de registros após limpeza.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Colunas finais</div>
+        <div class="card-value">31</div>
+        <div class="card-desc">Quantidade de variáveis após renomeação.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Duplicatas identificadas</div>
+        <div class="card-value">1.081</div>
+        <div class="card-desc">Número de linhas duplicadas detectadas.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Removidas por duplicidade</div>
+        <div class="card-value">1.081</div>
+        <div class="card-desc">0.3796% das linhas iniciais.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Linhas com faltantes</div>
+        <div class="card-value">0</div>
+        <div class="card-desc">Linhas com pelo menos um valor ausente.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Removidas por faltantes</div>
+        <div class="card-value">0</div>
+        <div class="card-desc">0.0000% das linhas iniciais.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Total removido</div>
+        <div class="card-value">1.081</div>
+        <div class="card-desc">0.3796% das linhas iniciais.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Base preservada</div>
+        <div class="card-value">99.6204%</div>
+        <div class="card-desc">Percentual da base original mantida após limpeza.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Arquivo tratado</div>
+        <div class="card-value">creditcard.csv</div>
+        <div class="card-desc">Nome da base final exportada.</div>
+    </div>
+    
+                    
+    <div class="metric-card">
+        <div class="card-title">Dimensão final</div>
+        <div class="card-value">283.726 x 31</div>
+        <div class="card-desc">Linhas x colunas.</div>
+    </div>
+    
+                </div>
+            </section>
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Tabela Resumo do ETL</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_resumo_etl', 'tabela_resumo_etl.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_resumo_etl" class="data-table">
+<thead><tr><th>Métrica</th><th>Valor</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td>Linhas iniciais</td><td>284807</td><td>Quantidade de registros antes do tratamento.</td></tr>
+<tr><td>Colunas iniciais</td><td>31</td><td>Quantidade de variáveis no arquivo original.</td></tr>
+<tr><td>Linhas finais</td><td>283726</td><td>Quantidade de registros após limpeza.</td></tr>
+<tr><td>Colunas finais</td><td>31</td><td>Quantidade de variáveis após renomeação.</td></tr>
+<tr><td>Duplicatas identificadas</td><td>1081</td><td>Número de linhas duplicadas detectadas.</td></tr>
+<tr><td>Removidas por duplicidade</td><td>1081</td><td>0.3796% das linhas iniciais.</td></tr>
+<tr><td>Linhas com faltantes</td><td>0</td><td>Linhas com pelo menos um valor ausente.</td></tr>
+<tr><td>Removidas por faltantes</td><td>0</td><td>0.0000% das linhas iniciais.</td></tr>
+<tr><td>Total removido</td><td>1081</td><td>0.3796% das linhas iniciais.</td></tr>
+<tr><td>Base preservada</td><td>99.6204%</td><td>Percentual da base original mantida após limpeza.</td></tr>
+<tr><td>Valores faltantes restantes</td><td>0</td><td>Deve ser zero após o tratamento.</td></tr>
+<tr><td>Dimensão final</td><td>283726 x 31</td><td>Linhas x colunas.</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Tabela de Transformações Aplicadas</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_transformacoes', 'tabela_transformacoes.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_transformacoes" class="data-table">
+<thead><tr><th>Etapa</th><th>Transformação</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Leitura da base original</td><td>Arquivo lido: a.csv</td></tr>
+<tr><td>2</td><td>Renomeação de colunas</td><td>Time, Amount e Class foram renomeadas para nomes descritivos.</td></tr>
+<tr><td>3</td><td>Remoção de duplicatas</td><td>Linhas duplicadas foram removidas mantendo a primeira ocorrência.</td></tr>
+<tr><td>4</td><td>Remoção de valores faltantes</td><td>Linhas com valores ausentes foram removidas.</td></tr>
+<tr><td>5</td><td>Exportação da base tratada</td><td>Base final salva como creditcard.csv.</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+            <section class="section">
+                <h2>Renomeação das Colunas</h2>
+
+                <h3>Colunas originais</h3>
+                <div class="tag-area">
+                    <span class='tag'>Time</span><span class='tag'>V1</span><span class='tag'>V2</span><span class='tag'>V3</span><span class='tag'>V4</span><span class='tag'>V5</span><span class='tag'>V6</span><span class='tag'>V7</span><span class='tag'>V8</span><span class='tag'>V9</span><span class='tag'>V10</span><span class='tag'>V11</span><span class='tag'>V12</span><span class='tag'>V13</span><span class='tag'>V14</span><span class='tag'>V15</span><span class='tag'>V16</span><span class='tag'>V17</span><span class='tag'>V18</span><span class='tag'>V19</span><span class='tag'>V20</span><span class='tag'>V21</span><span class='tag'>V22</span><span class='tag'>V23</span><span class='tag'>V24</span><span class='tag'>V25</span><span class='tag'>V26</span><span class='tag'>V27</span><span class='tag'>V28</span><span class='tag'>Amount</span><span class='tag'>Class</span>
+                </div>
+
+                <h3>Colunas após renomeação</h3>
+                <div class="tag-area">
+                    <span class='tag'>tempo_desde_a_primeira_transacao</span><span class='tag'>V1</span><span class='tag'>V2</span><span class='tag'>V3</span><span class='tag'>V4</span><span class='tag'>V5</span><span class='tag'>V6</span><span class='tag'>V7</span><span class='tag'>V8</span><span class='tag'>V9</span><span class='tag'>V10</span><span class='tag'>V11</span><span class='tag'>V12</span><span class='tag'>V13</span><span class='tag'>V14</span><span class='tag'>V15</span><span class='tag'>V16</span><span class='tag'>V17</span><span class='tag'>V18</span><span class='tag'>V19</span><span class='tag'>V20</span><span class='tag'>V21</span><span class='tag'>V22</span><span class='tag'>V23</span><span class='tag'>V24</span><span class='tag'>V25</span><span class='tag'>V26</span><span class='tag'>V27</span><span class='tag'>V28</span><span class='tag'>valor_de_transacao</span><span class='tag'>status_fraude</span>
+                </div>
+
+                <div class="note">
+                    As colunas <strong>Time</strong>, <strong>Amount</strong> e <strong>Class</strong>
+                    foram renomeadas para <strong>tempo_desde_a_primeira_transacao</strong>,
+                    <strong>valor_de_transacao</strong> e <strong>status_fraude</strong>, respectivamente.
+                </div>
+            </section>
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Distribuição do Target após Tratamento</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_distribuicao_target', 'tabela_distribuicao_target.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_distribuicao_target" class="data-table">
+<thead><tr><th>classe</th><th>quantidade</th><th>percentual</th></tr></thead>
+<tbody>
+<tr><td>Não Fraude</td><td>283.253</td><td>99.8333%</td></tr>
+<tr><td>Fraude</td><td>473</td><td>0.1667%</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Resumo Agrupado para o TCC</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_resumo_tcc', 'tabela_resumo_tcc.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_resumo_tcc" class="data-table">
+<thead><tr><th>Variável</th><th>Tipo</th><th>Não nulos</th><th>Nulos</th><th>% nulos</th><th>Valores únicos</th><th>Memória MB</th></tr></thead>
+<tbody>
+<tr><td>V1 a V28</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.1647</td></tr>
+<tr><td>tempo_desde_a_primeira_transacao</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>124.592</td><td>2.1647</td></tr>
+<tr><td>valor_de_transacao</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>32.767</td><td>2.1647</td></tr>
+<tr><td>status_fraude</td><td>int64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>2</td><td>2.1647</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Estrutura das Variáveis</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_estrutura_variaveis', 'tabela_estrutura_variaveis.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_estrutura_variaveis" class="data-table">
+<thead><tr><th>Variável</th><th>Tipo Python</th><th>Valores não nulos</th><th>Valores nulos</th><th>% nulos</th><th>Valores únicos</th><th>Memória bytes</th><th>Memória KB</th><th>Memória MB</th></tr></thead>
+<tbody>
+<tr><td>tempo_desde_a_primeira_transacao</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>124.592</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V1</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V2</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V3</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V4</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V5</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V6</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V7</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V8</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V9</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V10</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V11</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V12</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V13</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V14</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V15</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V16</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V17</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V18</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V19</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V20</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V21</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V22</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V23</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V24</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V25</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V26</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V27</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>V28</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>275.663</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>valor_de_transacao</td><td>float64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>32.767</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+<tr><td>status_fraude</td><td>int64</td><td>283.726</td><td>0</td><td>0.0000%</td><td>2</td><td>2.269.808</td><td>2216.61</td><td>2.1647</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+            
+    <section class="section">
+        <div class="section-header">
+            <h2>Primeiras Linhas da Base Tratada</h2>
+            <button
+                class="download-btn"
+                onclick="baixarTabelaCSV('tabela_primeiras_linhas', 'tabela_primeiras_linhas.csv')"
+            >
+                Baixar CSV
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabela_primeiras_linhas" class="data-table">
+<thead><tr><th>tempo_desde_a_primeira_transacao</th><th>V1</th><th>V2</th><th>V3</th><th>V4</th><th>V5</th><th>V6</th><th>V7</th><th>V8</th><th>V9</th><th>V10</th><th>V11</th><th>V12</th><th>V13</th><th>V14</th><th>V15</th><th>V16</th><th>V17</th><th>V18</th><th>V19</th><th>V20</th><th>V21</th><th>V22</th><th>V23</th><th>V24</th><th>V25</th><th>V26</th><th>V27</th><th>V28</th><th>valor_de_transacao</th><th>status_fraude</th></tr></thead>
+<tbody>
+<tr><td>0.0</td><td>-1.3598071336738</td><td>-0.0727811733098497</td><td>2.53634673796914</td><td>1.37815522427443</td><td>-0.338320769942518</td><td>0.462387777762292</td><td>0.239598554061257</td><td>0.0986979012610507</td><td>0.363786969611213</td><td>0.0907941719789316</td><td>-0.551599533260813</td><td>-0.617800855762348</td><td>-0.991389847235408</td><td>-0.311169353699879</td><td>1.46817697209427</td><td>-0.470400525259478</td><td>0.207971241929242</td><td>0.0257905801985591</td><td>0.403992960255733</td><td>0.251412098239705</td><td>-0.018306777944153</td><td>0.277837575558899</td><td>-0.110473910188767</td><td>0.0669280749146731</td><td>0.128539358273528</td><td>-0.189114843888824</td><td>0.133558376740387</td><td>-0.0210530534538215</td><td>149.62</td><td>0.0</td></tr>
+<tr><td>0.0</td><td>1.19185711131486</td><td>0.26615071205963</td><td>0.16648011335321</td><td>0.448154078460911</td><td>0.0600176492822243</td><td>-0.0823608088155687</td><td>-0.0788029833323113</td><td>0.0851016549148104</td><td>-0.255425128109186</td><td>-0.166974414004614</td><td>1.61272666105479</td><td>1.06523531137287</td><td>0.48909501589608</td><td>-0.143772296441519</td><td>0.635558093258208</td><td>0.463917041022171</td><td>-0.114804663102346</td><td>-0.183361270123994</td><td>-0.145783041325259</td><td>-0.0690831352230203</td><td>-0.225775248033138</td><td>-0.638671952771851</td><td>0.101288021253234</td><td>-0.339846475529127</td><td>0.167170404418143</td><td>0.125894532368176</td><td>-0.0089830991432281</td><td>0.0147241691924927</td><td>2.69</td><td>0.0</td></tr>
+<tr><td>1.0</td><td>-1.35835406159823</td><td>-1.34016307473609</td><td>1.77320934263119</td><td>0.379779593034328</td><td>-0.503198133318193</td><td>1.80049938079263</td><td>0.791460956450422</td><td>0.247675786588991</td><td>-1.51465432260583</td><td>0.207642865216696</td><td>0.624501459424895</td><td>0.066083685268831</td><td>0.717292731410831</td><td>-0.165945922763554</td><td>2.34586494901581</td><td>-2.89008319444231</td><td>1.10996937869599</td><td>-0.121359313195888</td><td>-2.26185709530414</td><td>0.524979725224404</td><td>0.247998153469754</td><td>0.771679401917229</td><td>0.909412262347719</td><td>-0.689280956490685</td><td>-0.327641833735251</td><td>-0.139096571514147</td><td>-0.0553527940384261</td><td>-0.0597518405929204</td><td>378.66</td><td>0.0</td></tr>
+<tr><td>1.0</td><td>-0.966271711572087</td><td>-0.185226008082898</td><td>1.79299333957872</td><td>-0.863291275036453</td><td>-0.0103088796030823</td><td>1.24720316752486</td><td>0.23760893977178</td><td>0.377435874652262</td><td>-1.38702406270197</td><td>-0.0549519224713749</td><td>-0.226487263835401</td><td>0.178228225877303</td><td>0.507756869957169</td><td>-0.28792374549456</td><td>-0.631418117709045</td><td>-1.0596472454325</td><td>-0.684092786345479</td><td>1.96577500349538</td><td>-1.2326219700892</td><td>-0.208037781160366</td><td>-0.108300452035545</td><td>0.0052735967825345</td><td>-0.190320518742841</td><td>-1.17557533186321</td><td>0.647376034602038</td><td>-0.221928844458407</td><td>0.0627228487293033</td><td>0.0614576285006353</td><td>123.5</td><td>0.0</td></tr>
+<tr><td>2.0</td><td>-1.15823309349523</td><td>0.877736754848451</td><td>1.548717846511</td><td>0.403033933955121</td><td>-0.407193377311653</td><td>0.0959214624684256</td><td>0.592940745385545</td><td>-0.270532677192282</td><td>0.817739308235294</td><td>0.753074431976354</td><td>-0.822842877946363</td><td>0.53819555014995</td><td>1.3458515932154</td><td>-1.11966983471731</td><td>0.175121130008994</td><td>-0.451449182813529</td><td>-0.237033239362776</td><td>-0.0381947870352842</td><td>0.803486924960175</td><td>0.408542360392758</td><td>-0.0094306971323291</td><td>0.79827849458971</td><td>-0.137458079619063</td><td>0.141266983824769</td><td>-0.206009587619756</td><td>0.502292224181569</td><td>0.219422229513348</td><td>0.215153147499206</td><td>69.99</td><td>0.0</td></tr>
+<tr><td>2.0</td><td>-0.425965884412454</td><td>0.960523044882985</td><td>1.14110934232219</td><td>-0.168252079760302</td><td>0.42098688077219</td><td>-0.0297275516639742</td><td>0.476200948720027</td><td>0.260314333074874</td><td>-0.56867137571251</td><td>-0.371407196834471</td><td>1.34126198001957</td><td>0.359893837038039</td><td>-0.358090652573631</td><td>-0.137133700217612</td><td>0.517616806555742</td><td>0.401725895589603</td><td>-0.0581328233640131</td><td>0.0686531494425432</td><td>-0.0331937877876282</td><td>0.0849676720682049</td><td>-0.208253514656728</td><td>-0.559824796253248</td><td>-0.0263976679795373</td><td>-0.371426583174346</td><td>-0.232793816737034</td><td>0.105914779097957</td><td>0.253844224739337</td><td>0.0810802569229443</td><td>3.67</td><td>0.0</td></tr>
+<tr><td>4.0</td><td>1.22965763450793</td><td>0.141003507049326</td><td>0.0453707735899449</td><td>1.20261273673594</td><td>0.191880988597645</td><td>0.272708122899098</td><td>-0.0051590028825098</td><td>0.0812129398830894</td><td>0.464959994783886</td><td>-0.0992543211289237</td><td>-1.41690724314928</td><td>-0.153825826253651</td><td>-0.75106271556262</td><td>0.16737196252175</td><td>0.0501435942254188</td><td>-0.443586797916727</td><td>0.002820512472347</td><td>-0.61198733994012</td><td>-0.0455750446637976</td><td>-0.21963255278686</td><td>-0.167716265815783</td><td>-0.270709726172363</td><td>-0.154103786809305</td><td>-0.780055415004671</td><td>0.75013693580659</td><td>-0.257236845917139</td><td>0.0345074297438413</td><td>0.0051677689062491</td><td>4.99</td><td>0.0</td></tr>
+<tr><td>7.0</td><td>-0.644269442348146</td><td>1.41796354547385</td><td>1.0743803763556</td><td>-0.492199018495015</td><td>0.948934094764157</td><td>0.428118462833089</td><td>1.12063135838353</td><td>-3.80786423873589</td><td>0.615374730667027</td><td>1.24937617815176</td><td>-0.619467796121913</td><td>0.291474353088705</td><td>1.75796421396042</td><td>-1.32386521970526</td><td>0.686132504394383</td><td>-0.0761269994382006</td><td>-1.2221273453247</td><td>-0.358221569869078</td><td>0.324504731321494</td><td>-0.156741852488285</td><td>1.94346533978412</td><td>-1.01545470979971</td><td>0.057503529867291</td><td>-0.649709005559993</td><td>-0.415266566234811</td><td>-0.0516342969262494</td><td>-1.20692108094258</td><td>-1.08533918832377</td><td>40.8</td><td>0.0</td></tr>
+<tr><td>7.0</td><td>-0.89428608220282</td><td>0.286157196276544</td><td>-0.113192212729871</td><td>-0.271526130088604</td><td>2.6695986595986</td><td>3.72181806112751</td><td>0.370145127676916</td><td>0.851084443200905</td><td>-0.392047586798604</td><td>-0.410430432848439</td><td>-0.705116586646536</td><td>-0.110452261733098</td><td>-0.286253632470583</td><td>0.0743553603016731</td><td>-0.328783050303565</td><td>-0.210077268148783</td><td>-0.499767968800267</td><td>0.118764861004217</td><td>0.57032816746536</td><td>0.0527356691149697</td><td>-0.0734251001059225</td><td>-0.268091632235551</td><td>-0.204232669947878</td><td>1.0115918018785</td><td>0.373204680146282</td><td>-0.384157307702294</td><td>0.0117473564581996</td><td>0.14240432992147</td><td>93.2</td><td>0.0</td></tr>
+<tr><td>9.0</td><td>-0.33826175242575</td><td>1.11959337641566</td><td>1.04436655157316</td><td>-0.222187276738296</td><td>0.49936080649727</td><td>-0.24676110061991</td><td>0.651583206489972</td><td>0.0695385865186387</td><td>-0.736727316364109</td><td>-0.366845639206541</td><td>1.01761446783262</td><td>0.836389570307029</td><td>1.00684351373408</td><td>-0.443522816876142</td><td>0.150219101422635</td><td>0.739452777052119</td><td>-0.540979921943059</td><td>0.47667726004282</td><td>0.451772964394125</td><td>0.203711454727929</td><td>-0.246913936910008</td><td>-0.633752642406113</td><td>-0.12079408408185</td><td>-0.385049925313426</td><td>-0.0697330460416923</td><td>0.0941988339514961</td><td>0.246219304619926</td><td>0.0830756493473326</td><td>3.68</td><td>0.0</td></tr>
+</tbody></table>
+        </div>
+    </section>
+    
+
+        </div>
+
+        <script>
+            function limparTextoCSV(texto) {
+                if (texto === null || texto === undefined) {
+                    return "";
+                }
+
+                texto = String(texto).replace(/\n/g, " ").replace(/\s+/g, " ").trim();
+
+                if (texto.includes(";") || texto.includes('"')) {
+                    texto = '"' + texto.replace(/"/g, '""') + '"';
+                }
+
+                return texto;
+            }
+
+            function baixarTabelaCSV(tableId, filename) {
+                const tabela = document.getElementById(tableId);
+
+                if (!tabela) {
+                    alert("Tabela não encontrada: " + tableId);
+                    return;
+                }
+
+                const linhas = [];
+
+                tabela.querySelectorAll("tr").forEach(function(row) {
+                    const celulas = Array.from(row.querySelectorAll("th, td"));
+                    const linha = celulas.map(celula => limparTextoCSV(celula.innerText)).join(";");
+                    linhas.push(linha);
+                });
+
+                const csv = "\ufeff" + linhas.join("\n");
+                const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                URL.revokeObjectURL(url);
+            }
+        </script>
+    </body>
+    </html>
+    

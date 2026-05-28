@@ -1,0 +1,31 @@
+
+% ============================================================
+% COMANDOS LaTeX DE EXEMPLO
+%
+% Pacotes recomendados no preâmbulo:
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{pdflscape}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Métricas dos melhores rankings do experimento 1x1.}
+\label{tab:metricas-ranks-1x1-main}
+\input{1x1_visu_scores/tabela_metricas_ranks.tex}
+\end{table}
+
+\begin{landscape}
+\small
+\input{1x1_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\end{landscape}
+
+% Exemplo de figura:
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{1x1_visu_scores/rank_1_FEATURE_representacao_1d.pdf}
+% \caption{Representação 1D da feature selecionada no Rank 1.}
+% \label{fig:rank1-representacao-1d}
+% \end{figure}

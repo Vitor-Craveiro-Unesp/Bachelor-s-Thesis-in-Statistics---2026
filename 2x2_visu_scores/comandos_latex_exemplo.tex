@@ -1,0 +1,32 @@
+
+% ============================================================
+% COMANDOS LaTeX DE EXEMPLO
+%
+% Pacotes recomendados:
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{pdflscape}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Métricas dos melhores rankings do experimento 2x2.}
+\label{tab:metricas-ranks-2x2-main}
+\input{2x2_visu_scores/tabela_metricas_ranks.tex}
+\end{table}
+
+\begin{landscape}
+\small
+\input{2x2_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\end{landscape}
+
+% Exemplo de figura:
+% Troque FEATURE1 e FEATURE2 pelo nome gerado no arquivo.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{2x2_visu_scores/rank_1_FEATURE1__FEATURE2_dispersao_2d.pdf}
+\caption{Dispersão 2D da combinação selecionada no Rank 1.}
+\label{fig:rank1-2x2-dispersao}
+\end{figure}

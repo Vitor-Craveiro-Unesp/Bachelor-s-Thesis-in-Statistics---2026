@@ -1,0 +1,101 @@
+
+% ============================================================
+% COMANDOS LaTeX DE EXEMPLO
+%
+% Pacotes recomendados no preâmbulo:
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{pdflscape}
+% ============================================================
+
+% ----------------------------
+% Tabela resumo do target
+% ----------------------------
+\begin{table}[H]
+\centering
+\caption{Resumo exploratório da variável alvo.}
+\label{tab:resumo-target-main}
+\input{relatorio_target/tabela_resumo_target.tex}
+\end{table}
+
+% ----------------------------
+% Distribuição do target
+% ----------------------------
+\begin{table}[H]
+\centering
+\caption{Distribuição absoluta e relativa das classes do target.}
+\label{tab:distribuicao-target-main}
+\input{relatorio_target/tabela_distribuicao_target.tex}
+\end{table}
+
+% ----------------------------
+% Baselines triviais
+% ----------------------------
+\begin{table}[H]
+\centering
+\caption{Matrizes de confusão dos cenários de referência.}
+\label{tab:matrizes-baseline-target-main}
+\input{relatorio_target/tabela_matrizes_baseline.tex}
+\end{table}
+
+% ----------------------------
+% Frequência absoluta
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{relatorio_target/grafico_frequencia_absoluta.pdf}
+\caption{Frequência absoluta das classes do target.}
+\label{fig:target-freq-absoluta}
+\end{figure}
+
+% ----------------------------
+% Frequência relativa
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{relatorio_target/grafico_frequencia_relativa.pdf}
+\caption{Frequência relativa das classes do target.}
+\label{fig:target-freq-relativa}
+\end{figure}
+
+% ----------------------------
+% Série acumulada
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{relatorio_target/grafico_serie_acumulada_fraudes.pdf}
+\caption{Série acumulada de fraudes pela ordem das transações.}
+\label{fig:target-serie-acumulada}
+\end{figure}
+
+% ----------------------------
+% Matriz ideal
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_ideal.pdf}
+\caption{Matriz de confusão do cenário ideal.}
+\label{fig:matriz-target-ideal}
+\end{figure}
+
+% ----------------------------
+% Matriz baseline: tudo não fraude
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_tudo_nao_fraude.pdf}
+\caption{Matriz de confusão do baseline que classifica todas as transações como não fraude.}
+\label{fig:matriz-target-tudo-nao-fraude}
+\end{figure}
+
+% ----------------------------
+% Matriz baseline: tudo fraude
+% ----------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_tudo_fraude.pdf}
+\caption{Matriz de confusão do baseline que classifica todas as transações como fraude.}
+\label{fig:matriz-target-tudo-fraude}
+\end{figure}
