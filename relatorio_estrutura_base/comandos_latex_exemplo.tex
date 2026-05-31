@@ -1,18 +1,13 @@
 
-% ============================================================
-% COMANDOS LaTeX DE EXEMPLO
-%
+
 % Pacotes recomendados no preâmbulo:
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
 % \usepackage{longtable}
 % \usepackage{pdflscape}
-% ============================================================
 
-% ----------------------------
-% Resumo geral do ETL
-% ----------------------------
+
 \begin{table}[H]
 \centering
 \caption{Resumo geral do tratamento da base.}
@@ -20,9 +15,7 @@
 \input{relatorio_estrutura_base/tabela_resumo_etl.tex}
 \end{table}
 
-% ----------------------------
-% Transformações aplicadas
-% ----------------------------
+
 \begin{table}[H]
 \centering
 \caption{Transformações aplicadas na base original.}
@@ -30,9 +23,6 @@
 \input{relatorio_estrutura_base/tabela_transformacoes.tex}
 \end{table}
 
-% ----------------------------
-% Distribuição do target
-% ----------------------------
 \begin{table}[H]
 \centering
 \caption{Distribuição da variável alvo após tratamento.}
@@ -40,9 +30,7 @@
 \input{relatorio_estrutura_base/tabela_distribuicao_target.tex}
 \end{table}
 
-% ----------------------------
-% Resumo agrupado para o TCC
-% ----------------------------
+
 \begin{table}[H]
 \centering
 \caption{Resumo agrupado das variáveis utilizadas.}
@@ -50,18 +38,12 @@
 \input{relatorio_estrutura_base/tabela_resumo_tcc.tex}
 \end{table}
 
-% ----------------------------
-% Estrutura completa das variáveis
-% ----------------------------
-% Como é uma tabela mais larga, recomenda-se usar landscape:
+
 \begin{landscape}
 \small
 \input{relatorio_estrutura_base/tabela_estrutura_variaveis.tex}
 \end{landscape}
 
-% ----------------------------
-% Primeiras linhas da base tratada
-% ----------------------------
 \begin{landscape}
 \small
 \input{relatorio_estrutura_base/tabela_primeiras_linhas.tex}

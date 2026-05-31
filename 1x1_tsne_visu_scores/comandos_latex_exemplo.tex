@@ -1,0 +1,30 @@
+
+% ============================================================
+% COMANDOS LaTeX DE EXEMPLO
+% Pacotes recomendados:
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{pdflscape}
+% ============================================================
+
+\begin{table}[H]
+\centering
+\caption{Métricas dos melhores rankings do experimento t-SNE 1D.}
+\label{tab:metricas-ranks-tsne-1d-main}
+\input{1x1_tsne_visu_scores/tabela_metricas_ranks.tex}
+\end{table}
+
+\begin{landscape}
+\small
+\input{1x1_tsne_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\end{landscape}
+
+% Exemplo de figura. Troque o nome pelo arquivo gerado.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{1x1_tsne_visu_scores/rank_1_tsne1_perplexity_EXEMPLO_representacao_1d.pdf}
+\caption{Representação 1D do t-SNE no Rank 1.}
+\label{fig:rank1-tsne1-representacao}
+\end{figure}

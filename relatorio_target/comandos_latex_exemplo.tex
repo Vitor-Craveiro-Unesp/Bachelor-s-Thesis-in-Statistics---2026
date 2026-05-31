@@ -1,18 +1,12 @@
 
-% ============================================================
-% COMANDOS LaTeX DE EXEMPLO
-%
+
 % Pacotes recomendados no preâmbulo:
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
 % \usepackage{longtable}
 % \usepackage{pdflscape}
-% ============================================================
 
-% ----------------------------
-% Tabela resumo do target
-% ----------------------------
 \begin{table}[H]
 \centering
 \caption{Resumo exploratório da variável alvo.}
@@ -20,9 +14,6 @@
 \input{relatorio_target/tabela_resumo_target.tex}
 \end{table}
 
-% ----------------------------
-% Distribuição do target
-% ----------------------------
 \begin{table}[H]
 \centering
 \caption{Distribuição absoluta e relativa das classes do target.}
@@ -30,9 +21,6 @@
 \input{relatorio_target/tabela_distribuicao_target.tex}
 \end{table}
 
-% ----------------------------
-% Baselines triviais
-% ----------------------------
 \begin{table}[H]
 \centering
 \caption{Matrizes de confusão dos cenários de referência.}
@@ -40,9 +28,6 @@
 \input{relatorio_target/tabela_matrizes_baseline.tex}
 \end{table}
 
-% ----------------------------
-% Frequência absoluta
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{relatorio_target/grafico_frequencia_absoluta.pdf}
@@ -50,9 +35,6 @@
 \label{fig:target-freq-absoluta}
 \end{figure}
 
-% ----------------------------
-% Frequência relativa
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{relatorio_target/grafico_frequencia_relativa.pdf}
@@ -60,9 +42,6 @@
 \label{fig:target-freq-relativa}
 \end{figure}
 
-% ----------------------------
-% Série acumulada
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{relatorio_target/grafico_serie_acumulada_fraudes.pdf}
@@ -70,9 +49,6 @@
 \label{fig:target-serie-acumulada}
 \end{figure}
 
-% ----------------------------
-% Matriz ideal
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_ideal.pdf}
@@ -80,9 +56,6 @@
 \label{fig:matriz-target-ideal}
 \end{figure}
 
-% ----------------------------
-% Matriz baseline: tudo não fraude
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_tudo_nao_fraude.pdf}
@@ -90,9 +63,6 @@
 \label{fig:matriz-target-tudo-nao-fraude}
 \end{figure}
 
-% ----------------------------
-% Matriz baseline: tudo fraude
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{relatorio_target/matriz_confusao_tudo_fraude.pdf}

@@ -1,18 +1,11 @@
 
-% ============================================================
-% COMANDOS LaTeX DE EXEMPLO
-% Recomendado no preâmbulo:
-%
+
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
 % \usepackage{longtable}
 % \usepackage{pdflscape}
-% ============================================================
 
-% ----------------------------
-% Tabela resumo de normalidade
-% ----------------------------
 \begin{table}[H]
 \centering
 \caption{Resumo das decisões do teste de normalidade.}
@@ -20,26 +13,16 @@
 \input{features_analise_exploratoria/tabela_resumo_normalidade.tex}
 \end{table}
 
-% ----------------------------
-% Tabela de dados gerais
-% ----------------------------
-% Como é uma tabela larga, recomenda-se usar landscape:
 \begin{landscape}
 \small
 \input{features_analise_exploratoria/tabela_dados_gerais.tex}
 \end{landscape}
 
-% ----------------------------
-% Tabela de normalidade
-% ----------------------------
 \begin{landscape}
 \small
 \input{features_analise_exploratoria/tabela_normalidade.tex}
 \end{landscape}
 
-% ----------------------------
-% Gráfico de curtose
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{features_analise_exploratoria/grafico_curtose.pdf}
@@ -47,9 +30,6 @@
 \label{fig:grafico-curtose}
 \end{figure}
 
-% ----------------------------
-% Matriz de Pearson
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{features_analise_exploratoria/matriz_pearson.pdf}
@@ -57,9 +37,6 @@
 \label{fig:matriz-pearson}
 \end{figure}
 
-% ----------------------------
-% Matriz de Spearman
-% ----------------------------
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{features_analise_exploratoria/matriz_spearman.pdf}

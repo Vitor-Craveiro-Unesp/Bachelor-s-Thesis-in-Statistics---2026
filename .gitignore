@@ -1,1 +1,6 @@
-creditcard.csv
+creditcard.csv*.html
+*_visu_scores/
+*_tsne_visu_scores/
+*.html
+*_visu_scores/
+*_tsne_visu_scores/
