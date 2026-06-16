@@ -1,31 +1,33 @@
 
-% ============================================================
-% COMANDOS LaTeX DE EXEMPLO
-%
-% Pacotes recomendados no preâmbulo:
+
+% Pacotes sugeridos no preâmbulo:
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
 % \usepackage{longtable}
 % \usepackage{pdflscape}
-% ============================================================
 
 \begin{table}[H]
 \centering
-\caption{Métricas dos melhores rankings do experimento 1x1.}
-\label{tab:metricas-ranks-1x1-main}
-\input{1x1_visu_scores/tabela_metricas_ranks.tex}
+\caption{Métricas dos melhores modelos por critério no experimento 1x1.}
+\label{tab:metricas-criterios-1x1-main}
+\input{1x1_visu_scores/tabela_metricas_criterios.tex}
 \end{table}
 
 \begin{landscape}
 \small
-\input{1x1_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\input{1x1_visu_scores/tabela_matrizes_confusao_criterios.tex}
+\end{landscape}
+
+\begin{landscape}
+\small
+\input{1x1_visu_scores/tabela_parametros_gmm_criterios.tex}
 \end{landscape}
 
 % Exemplo de figura:
 % \begin{figure}[H]
 % \centering
-% \includegraphics[width=\textwidth]{1x1_visu_scores/rank_1_FEATURE_representacao_1d.pdf}
-% \caption{Representação 1D da feature selecionada no Rank 1.}
-% \label{fig:rank1-representacao-1d}
+% \includegraphics[width=\textwidth]{1x1_visu_scores/melhor_auc_pr_rank_1_FEATURE_responsabilidades_melhor_corte.pdf}
+% \caption{Responsabilidades estimadas pela GMM para o melhor modelo segundo AUC-PR.}
+% \label{fig:melhor-aucpr-1x1-responsabilidades}
 % \end{figure}

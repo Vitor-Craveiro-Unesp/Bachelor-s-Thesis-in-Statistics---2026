@@ -1,32 +1,33 @@
 
-% ============================================================
-% COMANDOS LaTeX DE EXEMPLO
-%
-% Pacotes recomendados:
+
+% Pacotes sugeridos no preâmbulo:
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
 % \usepackage{longtable}
 % \usepackage{pdflscape}
-% ============================================================
 
 \begin{table}[H]
 \centering
-\caption{Métricas dos melhores rankings do experimento 2x2.}
-\label{tab:metricas-ranks-2x2-main}
-\input{2x2_visu_scores/tabela_metricas_ranks.tex}
+\caption{Métricas dos melhores modelos por critério no experimento 2x2.}
+\label{tab:metricas-criterios-2x2-main}
+\input{2x2_visu_scores/tabela_metricas_criterios.tex}
 \end{table}
 
 \begin{landscape}
 \small
-\input{2x2_visu_scores/tabela_matrizes_confusao_ranks.tex}
+\input{2x2_visu_scores/tabela_matrizes_confusao_criterios.tex}
+\end{landscape}
+
+\begin{landscape}
+\small
+\input{2x2_visu_scores/tabela_parametros_gmm_criterios.tex}
 \end{landscape}
 
 % Exemplo de figura:
-% Troque FEATURE1 e FEATURE2 pelo nome gerado no arquivo.
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{2x2_visu_scores/rank_1_FEATURE1__FEATURE2_dispersao_2d.pdf}
-\caption{Dispersão 2D da combinação selecionada no Rank 1.}
-\label{fig:rank1-2x2-dispersao}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{2x2_visu_scores/melhor_auc_pr_rank_1_FEATURE1__FEATURE2_responsabilidades_melhor_corte.pdf}
+% \caption{Responsabilidades estimadas pela GMM para o melhor modelo segundo AUC-PR.}
+% \label{fig:melhor-aucpr-2x2-responsabilidades}
+% \end{figure}

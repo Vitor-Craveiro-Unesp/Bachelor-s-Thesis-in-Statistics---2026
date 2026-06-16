@@ -1,5 +1,6 @@
 
 
+% Pacotes sugeridos no preâmbulo:
 % \usepackage{graphicx}
 % \usepackage{float}
 % \usepackage{booktabs}
@@ -15,7 +16,12 @@
 
 \begin{landscape}
 \small
-\input{features_analise_exploratoria/tabela_dados_gerais.tex}
+\input{features_analise_exploratoria/tabela_estatisticas_basicas_features.tex}
+\end{landscape}
+
+\begin{landscape}
+\small
+\input{features_analise_exploratoria/tabela_iqr_outliers_features.tex}
 \end{landscape}
 
 \begin{landscape}
@@ -25,21 +31,25 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{features_analise_exploratoria/grafico_curtose.pdf}
-\caption{Distribuição dos tipos de curtose das features numéricas.}
-\label{fig:grafico-curtose}
+\includegraphics[width=0.85\textwidth]{features_analise_exploratoria/grafico_outliers_iqr_por_feature.pdf}
+\caption{Distribuição percentual dos outliers detectados pelo critério IQR por feature.}
+\label{fig:grafico-outliers-iqr-por-feature}
 \end{figure}
 
+\begin{landscape}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{features_analise_exploratoria/matriz_pearson.pdf}
+\includegraphics[width=1.00\linewidth]{features_analise_exploratoria/matriz_pearson.pdf}
 \caption{Matriz de correlação de Pearson entre as features numéricas.}
 \label{fig:matriz-pearson}
 \end{figure}
+\end{landscape}
 
+\begin{landscape}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{features_analise_exploratoria/matriz_spearman.pdf}
+\includegraphics[width=1.00\linewidth]{features_analise_exploratoria/matriz_spearman.pdf}
 \caption{Matriz de correlação de Spearman entre as features numéricas.}
 \label{fig:matriz-spearman}
 \end{figure}
+\end{landscape}
